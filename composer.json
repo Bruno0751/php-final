@@ -1,0 +1,17 @@
+{
+    "name": "final-php/bruno",
+    "description": "project final of php",
+    "type": "project",
+    "license": "gpl",
+    "authors": [
+        {
+            "name": "Bruno Gressler da Silveira",
+            "email": "brunogressler1@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "twbs/bootstrap": "^3.4@dev",
+        "components/jquery": "dev-master"
+    }
+}
