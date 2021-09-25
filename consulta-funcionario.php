@@ -57,33 +57,33 @@
         <form name="filtro" method="POST" action="">
           <div class="row">
             <div class="col-md-6 form-group">
-              <input name="txtfiltrof" type="text" placeholder="Digite o Que Deseja!" class="form-control">
+              <input name="txtfiltro" type="text" placeholder="Digite o Que Deseja!" class="form-control">
             </div>
             <div class="col-md-6 ">
-              <select name="selfiltrarf" class="form-control">
-                <option value="todosf">Todos</option>
-                <option value="codigof">Código</option>
-                <option value="nomef">Nome</option>
-                <option value="idadef">Idade</option>
-                <option value="sexof">Sexo</option>
-                <option value="rgf">RG</option>
-                <option value="cpff">CPF</option>
-                <option value="cnpjf">CNPJ</option>
+              <select name="selfiltrar" class="form-control">
+                <option value="todos">Todos</option>
+                <option value="codigo">Código</option>
+                <option value="nome">Nome</option>
+                <option value="idade">Idade</option>
+                <option value="sexo">Sexo</option>
+                <option value="rg">RG</option>
+                <option value="cpf">CPF</option>
+                <option value="cnpj">CNPJ</option>
               </select>
             </div>
           </div>
           <div class="form-group">
-            <input type="submit" name="filtrarf" value="Procurar" class="btn btn-primary btn-block">
+            <input type="submit" name="filtrar" value="Procurar" class="btn btn-primary btn-block">
           </div>
         </form>
         <?php
-          if(isset($_POST['filtrarf'])){
-            $pesquisa = $_POST['txtfiltrof'];
-            $filtro = $_POST['selfiltrarf'];
+          if(isset($_POST['filtrar'])){
+            $pesquisa = $_POST['txtfiltro'];
+            $filtro = $_POST['selfiltrar'];
 
             if(!empty($pesquisa)){
               $funcionarioDAO = new FuncionarioDAO();
-              $array = $funcionarioDAO->filtrarFuncionario($pesquisa,$filtro);
+              $array = $funcionarioDAO->filtrarFuncionario($pesquisa, $filtro);
 
               if(count($array) == 0){
                 echo "<h2 style='color: #FF4500; text-align: center; font-size: 30px;'>Pesquisa Não Encontrada</h2>

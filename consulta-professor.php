@@ -62,13 +62,13 @@
           </div>
           <div class="col-md-6">
             <select name="selfilter" class="form-control">
-              <option value="todosp">Todos</option>
-              <option value="codigop">Código</option>
-              <option value="nomep">nome</option>
-              <option value="sexop">Sexo</option>
-              <option value="datacontratop">Data Do Contrato</option>
-              <option value="cpfp">CPF</option>
-              <option value="idadep">Idade</option>
+              <option value="todos">Todos</option>
+              <option value="codigo">Código</option>
+              <option value="nome">nome</option>
+              <option value="sexo">Sexo</option>
+              <option value="datacontrato">Data Do Contrato</option>
+              <option value="cpf">CPF</option>
+              <option value="idade">Idade</option>
             </select>
           </div>
         </div>
@@ -83,7 +83,7 @@
 
           if(!empty($pesquisa)){
             $professorDAO = new ProfessorDAO();
-            $array = $professorDAO->filtrarProfessor($pesquisa,$filtro);
+            $array = $professorDAO->filtrarProfessor($pesquisa, $filtro);
             if(count($array) == 0){
               echo "<h2 style='color: #FF4500; text-align: center; font-size: 30px;'>Pesquisa Não Encontrada</h2>
               <br>

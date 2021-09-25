@@ -12,7 +12,7 @@
 
     public function cadastrarProfessor($professor){
       try{
-        $stat = $this->conect->prepare("insert into professor(id_professor,nome,sexo,idade,cpf,data_contrato)values(null,?,?,?,?,?)");
+        $stat = $this->conect->prepare("INSERT INTO bd_php_final.professores(id_professor, nome, sexo, idade, cpf, data_contrato)VALUES(NULL, ?, ?, ?, ?, ?);");
 
         $stat->bindValue(1,$professor->nome);
         $stat->bindValue(2,$professor->sexo);
@@ -27,38 +27,38 @@
 
     public function buscarProfessor(){
       try{
-        $stat = $this->conect->query("select * from professor");
-        $array = $stat->fetchAll(PDO::FETCH_CLASS,'Professor');
+        $stat = $this->conect->query("SELECT * FROM bd_php_final.professores");
+        $array = $stat->fetchAll(PDO::FETCH_CLASS, 'Professor');
         return $array;
       }catch(PDOException $erro){
         echo "Erro ao Buscar Professores".$erro;
       }
     }
 
-    public function filtrarProfessor($pesquisa,$filtro){
+    public function filtrarProfessor($pesquisa, $filtro){
      try{
        $query = "";
        switch($filtro){
          case "todos" : $query = "";
          break;
-         case "codigop" : $query = "where id_professor = ".$pesquisa;
+         case "codigop" : $query = "WHERE id_professor = ".$pesquisa;
          break;
-         case "nomep" : $query = "where nome like '%".$pesquisa."%'";
+         case "nomep" : $query = "WHERE nome LIKE '%".$pesquisa."%'";
          break;
-         case "sexop" : $query = "where sexo like '%".$pesquisa."%'";
+         case "sexop" : $query = "WHERE sexo LIKE '%".$pesquisa."%'";
          break;
-         case "idadep" : $query = "where idade like '%".$pesquisa."%'";
+         case "idadep" : $query = "WHERE idade = ".$pesquisa;
          break;
-         case "cpfp" : $query = "where cpf like '%".$pesquisa."%'";
+         case "cpfp" : $query = "WHERE cpf LIKE '%".$pesquisa."%'";
          break;
-         case "data_contratop" : $query = "where data_contrato like '%".$pesquisa."%'";
+         case "data_contratop" : $query = "WHERE data_contrato LIKE '%".$pesquisa."%'";
          break;
 
        }
 
        //echo "query: ".$query;
-       $stat = $this->conect->query("select * from professor {$query}");
-       $array = $stat->fetchAll(PDO::FETCH_CLASS,"Professor");
+       $stat = $this->conect->query("SELECT * FROM bd_php_final.professores {$query};");
+       $array = $stat->fetchAll(PDO::FETCH_CLASS, "Professor");
        return $array;
      }catch(PDOException $erro){
        echo "Erro ao Filtrar Professor ".$erro;
@@ -67,7 +67,7 @@
 
     public function alterarProfessor($professor){
      try{
-       $stat = $this->conect->prepare("update professor set nome=?, sexo=?, idade=?, cpf=?, data_contrato=? where id_professor=?");
+       $stat = $this->conect->prepare("UPDATE bd_php_final.professores SET nome = ?, sexo = ?, idade = ?, cpf = ?, data_contrato = ? WHERE id_professor = ?;");
 
        $stat->bindValue(1,$professor->nome);
        $stat->bindValue(2,$professor->sexo);
@@ -84,7 +84,7 @@
 
     public function deletarProfessor($id){
       try{
-        $stat = $this->conect->prepare("delete from professor where id_professor = ?");
+        $stat = $this->conect->prepare("DELETE FROM bd_php_final.professores WHERE id_professor = ?;");
         $stat->bindValue(1,$id);
         $stat->execute();
       }catch(PDOException $erro){

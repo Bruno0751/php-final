@@ -12,7 +12,7 @@
 
     public function cadastrarCliente($cliente){
       try{
-        $stat = $this->conect->prepare("insert into cliente(id_cliente,nome,sexo,peso,altura,idade)values(null,?,?,?,?,?)");
+        $stat = $this->conect->prepare("INNSERT INTO bd_php_final.clientes(id_cliente,nome,sexo,peso,altura,idade)VALUES(NULL, ?, ?, ?, ?, ?);");
         $stat->bindValue(1,$cliente->nome);
         $stat->bindValue(2,$cliente->sexo);
         $stat->bindValue(3,$cliente->peso);
@@ -21,52 +21,52 @@
 
         $stat->execute();
       }catch(PDOException $erro){
-        echo "Erro ao Cadastrar Cliente ".$erro;
+        echo "<script>window.alert('Erro ao Cadastrar');</script>" .$erro;
       }
     }
 
     public function buscarCliente(){
       try{
-        $stat = $this->conect->query("select * from cliente");
-        $array = $stat->fetchAll(PDO::FETCH_CLASS,'Cliente');
+        $stat = $this->conect->query("SELECT * FROM bd_php_final.clientes;");
+        $array = $stat->fetchAll(PDO::FETCH_CLASS, 'Cliente');
         return $array;
       }catch(PDOException $erro){
-        echo "Erro ao Buscar Clientes".$erro;
+        echo "<script>window.alert('Erro ao Buscar');</script>" .$erro;
       }
     }
 
-    public function filtrarCliente($pesquisa,$filtro){
+    public function filtrarCliente($pesquisa, $filtro){
      try{
        $query = "";
        switch($filtro){
          case "todos" : $query = "";
          break;
-         case "codigo" : $query = "where id_cliente = ".$pesquisa;
+         case "codigo" : $query = "WHERE id_cliente = ".$pesquisa;
          break;
-         case "nome" : $query = "where nome like '%".$pesquisa."%'";
+         case "nome" : $query = "WHERE nome LIKE '%".$pesquisa."%'";
          break;
-         case "sexo" : $query = "where sexo like '%".$pesquisa."%'";
+         case "sexo" : $query = "WHERE sexo LIKE '%".$pesquisa."%'";
          break;
-         case "peso" : $query = "where peso like '%".$pesquisa."%'";
+         case "peso" : $query = "WHERE peso = ".$pesquisa;
          break;
-         case "altura" : $query = "where altura like '%".$pesquisa."%'";
+         case "altura" : $query = "WHERE altura = ".$pesquisa;
          break;
-         case "idade" : $query = "where idade like '%".$pesquisa."%'";
+         case "idade" : $query = "WHERE idade = ".$pesquisa;
          break;
        }
 
        //echo "query: ".$query;
-       $stat = $this->conect->query("select * from cliente {$query}");
-       $array = $stat->fetchAll(PDO::FETCH_CLASS,"Cliente");
+       $stat = $this->conect->query("SELECT * FROM bd_php_final.clientes {$query};");
+       $array = $stat->fetchAll(PDO::FETCH_CLASS, "Cliente");
        return $array;
      }catch(PDOException $erro){
-       echo "Erro ao Filtrar Cliente ".$erro;
+      echo "<script>window.alert('Erro ao Filtar');</script>" .$erro;
      }
    }
 
     public function alterarCliente($cliente){
      try{
-       $stat = $this->conect->prepare("update cliente set nome=?, sexo=?, peso=?, altura=?, idade=? where id_cliente=?");
+       $stat = $this->conect->prepare("UPDATE bd_php_final.clientes SET nome = ?, sexo = ?, peso = ?, altura = ?, idade = ? WHERE id_cliente = ?;");
 
        $stat->bindValue(1,$cliente->nome);
        $stat->bindValue(2,$cliente->sexo);
@@ -77,17 +77,17 @@
 
        $stat->execute();
      }catch(PDOException $erro){
-       echo "Erro ao Alterar Cliente ".$erro;
+      echo "<script>window.alert('Erro ao Alterar');</script>" .$erro;
      }
     }
 
     public function deletarCliente($id){
       try{
-        $stat = $this->conect->prepare("delete from cliente where id_cliente = ?");
+        $stat = $this->conect->prepare("DELETE FROM bd_php_final.clientes WHERE id_cliente = ?;");
         $stat->bindValue(1,$id);
         $stat->execute();
       }catch(PDOException $erro){
-        echo "Erro ao Deleta Cliente ".$erro;
+        echo "<script>window.alert('Erro ao Deletar');</script>" .$erro;
       }
     }
   }

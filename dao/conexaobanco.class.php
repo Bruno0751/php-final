@@ -10,11 +10,11 @@
     public static function getInstance(){
       try{
         if(!isset(self::$inst)){
-          self::$inst = new ConexaoBanco("mysql:dbname=bdphp;host=localhost","root","");
+          self::$inst = new ConexaoBanco("mysql:dbname=bd_php_final;host=localhost","root","9320");
         }
         return self::$inst;
       }catch(PDOException $erro){
-        echo "Erro ao Conectar Com o Banco ".$erro;
+        echo "<script>window.alert('Erro ao Conectar');</script>" .$erro;
       }
     }
   }

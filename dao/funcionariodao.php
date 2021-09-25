@@ -12,7 +12,7 @@
 
       public function cadastrarFuncionario($funcionario){
         try{
-          $stat = $this->conect->prepare("insert into funcionario(id_funcionario,nome,idade,sexo,rg,cpf,cnpj)values(null,?,?,?,?,?,?)");
+          $stat = $this->conect->prepare("INSERT INTO bd_php_final.funcionarios(id_funcionario, nome, idade, sexo, rg, cpf, cnpj)VALUES(NULL, ?, ?, ?, ?, ?, ?);");
 
           $stat->bindValue(1,$funcionario->nome);
           $stat->bindValue(2,$funcionario->idade);
@@ -22,52 +22,52 @@
           $stat->bindValue(6,$funcionario->cnpj);
           $stat->execute();
         }catch(PDOException $erro){
-          echo "Erro ao Cadastrar Funcionario".$erro;
+          echo "<script>window.alert('Erro ao Cadadtrar');</script>" .$erro;
         }
       }
 
       public function buscarFuncionario(){
         try{
-          $stat = $this->conect->query("select * from funcionario");
-          $array = $stat->fetchAll(PDO::FETCH_CLASS,"Funcionario");
+          $stat = $this->conect->query("SELECT * FROM bd_php_final.funcionarios;");
+          $array = $stat->fetchAll(PDO::FETCH_CLASS, "Funcionario");
           return $array;
         }catch(PDOException $erro){
-          echo "Erro ao Buscar Funcionarios".$erro;
+          echo "<script>window.alert('Erro ao Buscar');</script>" .$erro;
         }
       }
 
-      public function filtrarFuncionario($pesquisa,$filtro){
+      public function filtrarFuncionario($pesquisa, $filtro){
        try{
          $query = "";
          switch($filtro){
-           case "todosf" : $query = "";
+           case "todos" : $query = "";
            break;
-           case "codigof" : $query = "where id_funcionario = ".$pesquisa;
+           case "codigo" : $query = "WHERE id_funcionario = ".$pesquisa;
            break;
-           case "nomef" : $query = "where nome like '%".$pesquisa."%'";
+           case "nome" : $query = "WHERE nome LIKE '%".$pesquisa."%'";
            break;
-           case "idadef" : $query = "where idade like '%".$pesquisa."%'";
+           case "idade" : $query = "WHERE idade = ".$pesquisa;
            break;
-           case "sexof" : $query = "where sexo like '%".$pesquisa."%'";
+           case "sexo" : $query = "WHERE sexo LIKE '%".$pesquisa."%'";
            break;
-           case "rgf" : $query = "where rg like '%".$pesquisa."%'";
+           case "rgf" : $query = "WHERE rg LIKE '%".$pesquisa."%'";
            break;
-           case "cpff" : $query = "where cpf like '%".$pesquisa."%'";
+           case "cpf" : $query = "WHERE cpf LIKE '%".$pesquisa."%'";
            break;
-           case "cnpjf" : $query = "where cnpj like '%".$pesquisa."%'";
+           case "cnpj" : $query = "WHERE cnpj LIKE '%".$pesquisa."%'";
            break;
          }
-         $stat = $this->conect->query("select * from funcionario {$query}");
-         $array = $stat->fetchAll(PDO::FETCH_CLASS,"Funcionario");
+         $stat = $this->conect->query("SELECT * FROM bd_php_final.funcionarios {$query};");
+         $array = $stat->fetchAll(PDO::FETCH_CLASS, "Funcionario");
          return $array;
        }catch(PDOException $erro){
-         echo "Erro ao Filtrar Funcionario ".$erro;
+        echo "<script>window.alert('Erro ao Filtrar');</script>" .$erro;
        }
      }
 
      public function alterarFuncionario($funcionario){
       try{
-        $stat = $this->conect->prepare("update funcionario set nome=?, idade=?, sexo=?, rg=?, cpf=?, cnpj=? where id_funcionario=?");
+        $stat = $this->conect->prepare("UPDATE bd_php_final.funcionarios SET nome = ?, idade = ?, sexo = ?, rg = ?, cpf = ?, cnpj = ? WHERE id_funcionario = ?;");
 
         $stat->bindValue(1,$funcionario->nome);
         $stat->bindValue(2,$funcionario->idade);
@@ -79,17 +79,17 @@
 
         $stat->execute();
       }catch(PDOException $erro){
-        echo "Erro ao Alterar Funcionario ".$erro;
+        echo "<script>window.alert('Erro ao Alterar');</script>" .$erro;
       }
      }
 
       public function deletarFuncionario($id){
         try{
-          $stat = $this->conect->prepare("delete from funcionario where id_funcionario = ?");
+          $stat = $this->conect->prepare("DELETE FROM bd_php_final.funcionarios WHERE id_funcionario = ?;");
           $stat->bindValue(1,$id);
           $stat->execute();
         }catch(PDOException $erro){
-          echo "Erro ao Deleta Funcionarios".$erro;
+          echo "<script>window.alert('Erro ao Deletar');</script>" .$erro;
         }
       }
   }

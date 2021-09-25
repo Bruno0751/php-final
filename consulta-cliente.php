@@ -79,10 +79,10 @@
           $pesquisa = $_POST['txtfiltro'];
           $filtro = $_POST['selfilter'];
 
-            if(!empty($pesquisa)){
+          if(!empty($pesquisa)){
             $clienteDAO = new ClienteDAO();
-              $array = $clienteDAO->filtrarCliente($pesquisa,$filtro);
-              if(count($array) == 0){
+            $array = $clienteDAO->filtrarCliente($pesquisa, $filtro);
+            if(count($array) == 0){
               echo "<h2 style='color: #FF4500; text-align: center; font-size: 30px;'>Pesquisa Não Encontrada</h2>
               <br>
               <p style='color: green; text-align: center; font-size: 30px;'>Tente Novamente</h2>";
@@ -138,12 +138,11 @@
           if(isset($_GET['id'])){
             $clienteDAO->deletarCliente($_GET['id']);
               $_SESSION['msg'] = "Cliente Excluido";
-              //erro ob_end_flush();
               header("location:consulta-cliente.php");
               ob_end_flush();
           }
         ?>
-      </div><!--fecha div table-responsive container-->
-    </div><!--fecha div container-fluid-->
+      </div>
+    </div>
   </body>
 </html>
